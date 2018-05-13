@@ -29,6 +29,20 @@
     enablerepo: jenkins
     state: present
 
+- name: Get Installed bundle
+  git:
+    repo: 'https://github.com/tejoyasha/jenkins-base.git'
+    dest: /var/lib/jenkins
+    version: master
+
+- name: Set the jenkins foler appropriate permissions
+  file:
+    dest: /var/lib/jenkins
+    owner: jenkins
+    group: jenkins
+    mode: u=rwX,g=rX,o=rX 
+    recurse: yes
+
 - name: Start Jenkins
   service:
     name: jenkins
